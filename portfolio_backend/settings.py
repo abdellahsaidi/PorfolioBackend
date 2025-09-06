@@ -13,6 +13,7 @@ ALLOWED_HOSTS = [
     "portfolio-backend-0w1g.onrender.com",  # render backend
     "localhost",                     # local testing
     "127.0.0.1",
+    "codebyabdellah.vercel.app",
 ]
 
 INSTALLED_APPS = [
@@ -91,6 +92,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",             # local frontend
     "https://codebyabdellah.com",        # frontend custom domain
     "https://portfolio-backend-0w1g.onrender.com",  # backend domain (for API testing)
+    "https://codebyabdellah.vercel.app",
 ]
 
 REST_FRAMEWORK = {
