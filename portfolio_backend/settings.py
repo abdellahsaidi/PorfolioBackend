@@ -8,7 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["codebyabdellah.com"]  
+ALLOWED_HOSTS = [
+    "codebyabdellah.com",            # your custom domain
+    "portfolio-backend-0w1g.onrender.com",  # render backend
+    "localhost",                     # local testing
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -19,7 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "portfolio",  
+    "portfolio",
 ]
 
 MIDDLEWARE = [
@@ -83,8 +88,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  
-    "https://codebyabdellah.com",  
+    "http://localhost:5173",             # local frontend
+    "https://codebyabdellah.com",        # frontend custom domain
+    "https://portfolio-backend-0w1g.onrender.com",  # backend domain (for API testing)
 ]
 
 REST_FRAMEWORK = {
