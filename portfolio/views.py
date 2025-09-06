@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.http import FileResponse, Http404
 from django.core.mail import send_mail
 from rest_framework.views import APIView
@@ -6,17 +8,13 @@ from rest_framework import status
 from .models import CV, SendMail
 from .serializers import SendMailSerializer
 
+
 class CVDownloadView(APIView):
     def get(self, request, *args, **kwargs):
-        try:
-            cv = CV.objects.first()  
-            if not cv:
-                return Response({"error": "No CV found"}, status=status.HTTP_404_NOT_FOUND)
-
-            return FileResponse(cv.file.open(), as_attachment=True, filename="CV.pdf")
-
-        except CV.DoesNotExist:
+        file_path = os.path.join(settings.STATIC_ROOT, "cv", "CV.pdf")
+        if not os.path.exists(file_path):
             raise Http404("CV not found")
+        return FileResponse(open(file_path, "rb"), as_attachment=True, filename="CV.pdf")
 
 
 
