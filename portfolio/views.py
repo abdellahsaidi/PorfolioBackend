@@ -40,3 +40,32 @@ class VisitorMailView(APIView):
                 return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.core.mail import send_mail
+from django.core.cache import cache
+from django.utils import timezone
+
+
+class NotifyVisitView(APIView):
+    def get(self, request, *args, **kwargs):
+        subject = "New Visitor Alert"
+        message = "A new visitor has just accessed your website."
+        from_email = "smtp.gmail.com"  
+        recipient_list = ["abdellahsaidi310309@gmail.com"]
+
+        last_notified = cache.get("last_notify_time")
+
+        if not last_notified or (timezone.now() - last_notified).total_seconds() > 60:
+            try:
+                send_mail(subject, message, from_email, recipient_list)
+                cache.set("last_notify_time", timezone.now(), timeout=60)  # store for 1 min
+                return Response({"success": "Notification sent"}, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+            return Response({"info": "Notification already sent recently"}, status=status.HTTP_200_OK)
