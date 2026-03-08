@@ -10,7 +10,7 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     "codebyabdellah.com",            # your custom domain
-    "portfolio-backend-0w1g.onrender.com",  # render backend
+    "https://vercel.com/codebyabdellahs-projects/backendportfolio/5WiPHd93EHXJyuPunwdhPhMiRuQq",  # render backend
     "localhost",                     # local testing
     "127.0.0.1",
     "codebyabdellah.vercel.app",
@@ -92,7 +92,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",             # local frontend
     "https://codebyabdellah.com",        # frontend custom domain
-    "https://portfolio-backend-0w1g.onrender.com",  # backend domain (for API testing)
+    "https://vercel.com/codebyabdellahs-projects/backendportfolio/5WiPHd93EHXJyuPunwdhPhMiRuQq",  # backend domain (for API testing)
     "https://codebyabdellah.vercel.app",
 ]
 
